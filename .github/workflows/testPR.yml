@@ -20,7 +20,7 @@ jobs:
 
     - name: Copy files to VPS
       run: |
-        rsync -e "ssh -o StrictHostKeyChecking=no" -az --delete . intruder@34.142.224.106:path/to/deployment/folder
+        rsync -e "ssh -o StrictHostKeyChecking=no" -az --delete . intruder@34.142.224.106:/home/intruder
 
     - name: Restart server
       run: |
