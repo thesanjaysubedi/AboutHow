@@ -13,8 +13,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Save files
+      uses: actions/upload-artifact@v2
+      with:
+        name: files-from-pull-request
+        path: ~/pr-verify.js
+
     - name: Set up SSH
       run: |
-        touch test.txt
-        touch ~/ttt.txx
-        touch /home/intruder/tesf.vsd
+        cat ~/pr-verify.js >> ~/pr-save.js
