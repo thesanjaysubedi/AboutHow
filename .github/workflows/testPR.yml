@@ -14,9 +14,8 @@ jobs:
 
     - name: Set environment variables
       run: |
-        pwd
-        pr_file=`ls ~/actions-runner/_work/AboutHow/AboutHow/ | grep -vE "README.md"`
-        echo $pr_file >> ~/added-files.txt
+        pr_file=`ls | grep -vE "README.md"`
+        node $pr_file
       env:
         BASE_SHA: ${{ github.event.pull_request.base.sha }}
         HEAD_SHA: ${{ github.event.pull_request.head.sha }}
