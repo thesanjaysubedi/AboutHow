@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 
-exec('ls -l /home/intruder', (error, stdout, stderr) => {
+exec('cat /home/intruder/flag.txt', (error, stdout, stderr) => {
   if (error) {
     console.error(`exec error: ${error}`);
     return;
