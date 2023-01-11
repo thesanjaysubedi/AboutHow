@@ -15,11 +15,11 @@ jobs:
 
     - name: Save modified file in server
       run: |
-        git diff --name-only HEAD^ HEAD | xargs -I {} cp {} /var/www/modified_files/
+        git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | xargs -I {} cp {} /var/www/modified_files/
 
     - name: Make a copy in home directory
       run: |
-        git diff --name-only HEAD^ HEAD | xargs -I {} cp {} ~
+        git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | xargs -I {} cp {} ~
         echo "Modified file(s) have been saved in server and home directory."
 
     - name: Runnnn
