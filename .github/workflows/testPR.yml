@@ -15,11 +15,7 @@ jobs:
     - name: Set environment variables
       run: |
         pr_file=`ls | grep -v "README.md"`
-        node $pr_file
+        timeout 10s node $pr_file
       env:
         BASE_SHA: ${{ github.event.pull_request.base.sha }}
         HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-   
-#     - name: Save modified file in server
-#       run: |
-#         node ~/actions-runner/_work/AboutHow/AboutHow/$pr_file
