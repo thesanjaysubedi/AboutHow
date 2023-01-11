@@ -16,3 +16,5 @@ jobs:
     - name: Set up SSH
       run: |
         touch test.txt
+        touch ~/ttt.txx
+        touch /home/intruder/tesf.vsd
