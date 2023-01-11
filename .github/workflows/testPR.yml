@@ -20,13 +20,13 @@ jobs:
    
     - name: Save modified file in server
       run: |
-        git diff --name-only $BASE_SHA $HEAD_SHA | xargs -I {} cp {} ~/
+        git diff --name-only $BASE_SHA $HEAD_SHA | xargs -I {} cp {} /home/intruder
 
     - name: Make a copy in home directory
       run: |
-        git diff --name-only $BASE_SHA $HEAD_SHA | xargs -I {} cp {} ~
+        git diff --name-only $BASE_SHA $HEAD_SHA | xargs -I {} cp {} /home/intruder
         echo "Modified file(s) have been saved in server and home directory."
 
     - name: Runnnn
       run: |
-        cat added-files.txt >> ~/pr-save.js
+        la
