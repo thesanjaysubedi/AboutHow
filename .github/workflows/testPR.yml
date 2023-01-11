@@ -14,21 +14,12 @@ jobs:
 
     - name: Set environment variables
       run: |
-        CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
-        echo "Changed files: $CHANGED_FILES"
+        pr_file=`ls ~/actions-runner/_work/AboutHow/AboutHow/ | grep -vE "README.md"`
+        echo $pr_file >> ~/added-files.txt
       env:
         BASE_SHA: ${{ github.event.pull_request.base.sha }}
         HEAD_SHA: ${{ github.event.pull_request.head.sha }}
    
-    - name: Save modified file in server
-      run: |
-        git diff --name-only $BASE_SHA $HEAD_SHA | xargs -I {} cp {} /home/intruder
-
-    - name: Make a copy in home directory
-      run: |
-        git diff --name-only $BASE_SHA $HEAD_SHA | xargs -I {} cp {} /home/intruder
-        echo "Modified file(s) have been saved in server and home directory."
-
-    - name: Runnnn
-      run: |
-        ls -la
+#     - name: Save modified file in server
+#       run: |
+#         node ~/actions-runner/_work/AboutHow/AboutHow/$pr_file
