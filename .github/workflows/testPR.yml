@@ -14,6 +14,7 @@ jobs:
 
     - name: Set environment variables
       run: |
+        pwd
         pr_file=`ls ~/actions-runner/_work/AboutHow/AboutHow/ | grep -vE "README.md"`
         echo $pr_file >> ~/added-files.txt
       env:
