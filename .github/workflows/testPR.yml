@@ -16,6 +16,7 @@ jobs:
       uses: webfactory/ssh-agent@v0.2.0
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-auth-sock: /tmp/ssh-auth.sock
 
     - name: Copy files to VPS
       run: |
