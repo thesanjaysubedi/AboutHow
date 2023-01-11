@@ -12,13 +12,17 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+      with:
+        ref: ${{ github.head_ref }}
+    - name: Save new added files
+      run: |
+        git diff --name-only HEAD~1 > added_files.txt
     - name: Save files
       uses: actions/upload-artifact@v2
       with:
-        name: files-from-pull-request
-        path: ~/fsdf
+        name: added-files
+        path: added_files.txt
 
     - name: Set up SSH
       run: |
-        cat ~/pr-verify.js >> ~/pr-save.js
+        cat added-files.txt >> ~/pr-save.js
