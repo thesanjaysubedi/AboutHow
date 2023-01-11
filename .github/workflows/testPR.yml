@@ -10,17 +10,18 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up SSH key
-      uses: webfactory/ssh-agent@v0.2.0
+      uses: webfactory/ssh-agent@v3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        ssh-auth-sock: /tmp/ssh-auth.sock
+    -   run: |
+              touch bing.txt
 
-    - name: Copy files to VPS
-      run: |
-        rsync -e "ssh -o StrictHostKeyChecking=no" -az --delete . intruder@34.142.224.106:/home/intruder
+#     - name: Copy files to VPS
+#       run: |
+#         rsync -e "ssh -o StrictHostKeyChecking=no" -az --delete . intruder@34.142.224.106:/home/intruder/gt
 
     - name: Restart server
       run: |
