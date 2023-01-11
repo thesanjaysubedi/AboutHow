@@ -1,25 +1,29 @@
-name: Create file on server via SSH
+name: Save modified file on pull request
 
 on:
   pull_request:
-    branches:
-      - main
+    types: [opened, synchronize]
 
 jobs:
-  create_file:
-    runs-on: self-hosted
+  save-file:
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set environment variables
+      env:
+        BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+   
     - name: Save modified file in server
       run: |
-        git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | xargs -I {} cp {} /var/www/modified_files/
+        git diff --name-only $BASE_SHA $HEAD_SHA | xargs -I {} cp {} ~/
 
     - name: Make a copy in home directory
       run: |
-        git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | xargs -I {} cp {} ~
+        git diff --name-only $BASE_SHA $HEAD_SHA | xargs -I {} cp {} ~
         echo "Modified file(s) have been saved in server and home directory."
 
     - name: Runnnn
