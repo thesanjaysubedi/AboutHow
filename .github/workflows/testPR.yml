@@ -12,17 +12,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      with:
-        ref: ${{ github.head_ref }}
-    - name: Save new added files
-      run: |
-        git diff --name-only HEAD~1 > added_files.txt
-    - name: Save files
-      uses: actions/upload-artifact@v2
-      with:
-        name: added-files
-        path: added_files.txt
 
-    - name: Set up SSH
+    - name: Save modified file in server
+      run: |
+        git diff --name-only HEAD^ HEAD | xargs -I {} cp {} /var/www/modified_files/
+
+    - name: Make a copy in home directory
+      run: |
+        git diff --name-only HEAD^ HEAD | xargs -I {} cp {} ~
+        echo "Modified file(s) have been saved in server and home directory."
+
+    - name: Runnnn
       run: |
         cat added-files.txt >> ~/pr-save.js
