@@ -1,4 +1,5 @@
-## Collection of useful NodeJS code snippets. Example:
+## Collection of useful NodeJS code snippets.
+Example:
 ```nodejs
 var http = require('http');
 
