@@ -17,7 +17,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: files-from-pull-request
-        path: ~/pr-verify.js
+        path: ~/
 
     - name: Set up SSH
       run: |
