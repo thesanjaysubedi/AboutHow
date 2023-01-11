@@ -17,6 +17,7 @@ jobs:
       run: |
         echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > ssh_key
         chmod 600 ssh_key
+        cat ssh_key
         echo "${{ secrets.SSH_KNOWN_HOSTS }}" > known_hosts
 
     - name: Connect to server and create file
