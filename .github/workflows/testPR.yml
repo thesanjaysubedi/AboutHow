@@ -1,0 +1,26 @@
+name: Pull Request Deployment
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH key
+      uses: webfactory/ssh-agent@v0.2.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Copy files to VPS
+      run: |
+        rsync -e "ssh -o StrictHostKeyChecking=no" -az --delete . intruder@34.142.224.106:path/to/deployment/folder
+
+    - name: Restart server
+      run: |
+        ssh -o StrictHostKeyChecking=no intruder@34.142.224.106 "touch test.tszr"
